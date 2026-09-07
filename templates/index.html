@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Python Currency Converter</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body><div class="card">
+<h1>Currency Converter</h1><p class="subtitle">Python Web Application</p>
+<form action="/convert" method="post">
+<label>Amount</label><input name="amount" type="number" min="0" step="0.01" required placeholder="Enter amount" value="{{ amount }}">
+<label>From Currency</label><select name="from_currency">{% for code, name in currencies.items() %}<option value="{{ code }}" {% if code == from_currency %}selected{% endif %}>{{ code }} - {{ name }}</option>{% endfor %}</select>
+<label>To Currency</label><select name="to_currency">{% for code, name in currencies.items() %}<option value="{{ code }}" {% if code == to_currency %}selected{% endif %}>{{ code }} - {{ name }}</option>{% endfor %}</select>
+<button type="submit">Convert Currency</button></form>
+{% if result %}<div class="result">{{ result }}</div>{% endif %}
+{% if error %}<div class="error">{{ error }}</div>{% endif %}
+<div class="footer">Exchange rates are retrieved at conversion time.</div>
+</div></body></html>

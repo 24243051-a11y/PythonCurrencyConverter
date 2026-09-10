@@ -5,3 +5,10 @@ venv/
 env/
 .env
 deploy/
+target/
+.idea/
+.git/
+*.iml
+.DS_Store
+*.log
+*.class

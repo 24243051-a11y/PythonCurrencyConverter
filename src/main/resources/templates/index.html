@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Converter</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="card">
+    <h1>Currency Converter</h1>
+    <p class="subtitle">Java Web Application</p>
+
+    <form th:action="@{/convert}" method="post">
+        <label for="amount">Amount</label>
+        <input id="amount" name="amount" type="number" min="0" step="0.01" required
+               placeholder="Enter amount" th:value="${amount}">
+
+        <label for="fromCurrency">From Currency</label>
+        <select id="fromCurrency" name="fromCurrency">
+            <option th:each="entry : ${currencies.entrySet()}"
+                    th:value="${entry.key}"
+                    th:text="${entry.key + ' - ' + entry.value}"
+                    th:selected="${entry.key == fromCurrency}">
+            </option>
+        </select>
+
+        <label for="toCurrency">To Currency</label>
+        <select id="toCurrency" name="toCurrency">
+            <option th:each="entry : ${currencies.entrySet()}"
+                    th:value="${entry.key}"
+                    th:text="${entry.key + ' - ' + entry.value}"
+                    th:selected="${entry.key == toCurrency}">
+            </option>
+        </select>
+
+        <button type="submit">Convert Currency</button>
+    </form>
+
+    <div th:if="${result != null}" class="result" th:text="${result}"></div>
+    <div th:if="${error != null}" class="error" th:text="${error}"></div>
+
+    <div class="footer">Rates are preloaded locally for this demo.</div>
+</div>
+</body>
+</html>
